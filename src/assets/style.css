@@ -488,6 +488,70 @@ input:focus {
   background: rgba(0, 0, 0, 0.12);
 }
 
+.optimizer-grid {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.optimizer-scorecard,
+.optimizer-panel {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+}
+
+.optimizer-ring {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  align-content: center;
+  min-height: 140px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+}
+
+.optimizer-score {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.optimizer-label,
+.optimizer-heading {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.optimizer-meter {
+  height: 10px;
+  margin: 14px 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.optimizer-meter-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00a8fc, #8dd7ff);
+}
+
+.optimizer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.muted-chip {
+  opacity: 0.72;
+}
+
 .analyze-button {
   border: none;
   display: inline-block;
@@ -604,6 +668,13 @@ input,
 .light-mode .file-chip,
 .light-mode .suggestion-item,
 .light-mode .feature,
-.light-mode .pdf-frame {
+.light-mode .pdf-frame,
+.light-mode .optimizer-scorecard,
+.light-mode .optimizer-panel,
+.light-mode .optimizer-ring {
   background-color: rgba(255, 255, 255, 0.6);
+}
+
+.light-mode .optimizer-ring {
+  border-color: rgba(0, 0, 0, 0.12);
 }

@@ -198,10 +198,49 @@
               <p class="eyebrow">ATS</p>
               <h3>Optimiser</h3>
             </div>
-            <span class="badge">{{ atsScore }}%</span>
+            <span class="badge">{{ atsBand }}</span>
           </div>
 
-          <p class="small">{{ atsSummary }}</p>
+          <div class="optimizer-grid">
+            <div class="optimizer-scorecard">
+              <div class="optimizer-ring">
+                <div class="optimizer-score">{{ atsScore }}%</div>
+                <div class="optimizer-label">{{ atsBand }}</div>
+              </div>
+              <div class="optimizer-meter">
+                <div class="optimizer-meter-fill" :style="{ width: `${atsScore}%` }" />
+              </div>
+              <p class="small">{{ atsSummary }}</p>
+            </div>
+
+            <div class="optimizer-panel">
+              <p class="optimizer-heading">Top keywords to keep</p>
+              <div class="chip-row">
+                <span v-for="item in matchedKeywords" :key="item" class="feature">
+                  {{ item }}
+                </span>
+                <span v-if="!matchedKeywords.length" class="feature muted-chip">
+                  No keywords matched yet
+                </span>
+              </div>
+
+              <p class="optimizer-heading">Priority gaps</p>
+              <div class="suggestion-list">
+                <div v-for="item in priorityGaps" :key="item" class="suggestion-item">
+                  {{ item }}
+                </div>
+              </div>
+
+              <div class="optimizer-actions">
+                <button class="menu-button analyze-button" :disabled="!analysisReady" @click="generateCoverLetter">
+                  {{ coverLetterReady ? "Regenerate cover letter" : "Generate cover letter" }}
+                </button>
+                <button class="menu-button analyze-button" :disabled="!analysisReady" @click="applySuggestions">
+                  {{ cvReady ? "Refresh CV suggestions" : "Apply suggestions to CV" }}
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>
@@ -315,6 +354,31 @@ const atsSummary = computed(() => {
   if (atsScore.value >= 70)
     return "Good baseline fit. Add missing keywords and clearer outcomes."
   return "The CV likely needs more role-specific language and evidence."
+})
+
+const atsBand = computed(() => {
+  if (!analysisReady.value) return "Waiting"
+  if (atsScore.value >= 85) return "Strong fit"
+  if (atsScore.value >= 70) return "Promising"
+  return "Needs work"
+})
+
+const priorityGaps = computed(() => {
+  if (!analysisReady.value) {
+    return [
+      "Upload a CV to see matched keywords.",
+      "The optimiser will highlight missing evidence.",
+    ]
+  }
+
+  if (!missingKeywords.value.length) {
+    return [
+      "The CV already covers the main role terms.",
+      "Use stronger measurable outcomes in bullet points.",
+    ]
+  }
+
+  return missingKeywords.value.slice(0, 3).map((skill) => `Add clearer evidence for ${skill}.`)
 })
 
 function handleFiles(event) {
