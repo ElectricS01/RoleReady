@@ -44,7 +44,6 @@
               @change="handleFiles"
             />
             <span>Drop or choose CV files</span>
-            <small>Files stay local in the browser</small>
           </label>
 
           <div v-if="files.length" class="chip-row">
@@ -58,7 +57,7 @@
           <div class="assistant-card-head">
             <div>
               <p class="eyebrow">Action</p>
-              <h3>Run the local analysis</h3>
+              <h3>Run the analysis</h3>
             </div>
             <span class="badge">Step 3</span>
           </div>
@@ -208,7 +207,10 @@
                 <div class="optimizer-label">{{ atsBand }}</div>
               </div>
               <div class="optimizer-meter">
-                <div class="optimizer-meter-fill" :style="{ width: `${atsScore}%` }" />
+                <div
+                  class="optimizer-meter-fill"
+                  :style="{ width: `${atsScore}%` }"
+                />
               </div>
               <p class="small">{{ atsSummary }}</p>
             </div>
@@ -216,7 +218,11 @@
             <div class="optimizer-panel">
               <p class="optimizer-heading">Top keywords to keep</p>
               <div class="chip-row">
-                <span v-for="item in matchedKeywords" :key="item" class="feature">
+                <span
+                  v-for="item in matchedKeywords"
+                  :key="item"
+                  class="feature"
+                >
                   {{ item }}
                 </span>
                 <span v-if="!matchedKeywords.length" class="feature muted-chip">
@@ -226,17 +232,37 @@
 
               <p class="optimizer-heading">Priority gaps</p>
               <div class="suggestion-list">
-                <div v-for="item in priorityGaps" :key="item" class="suggestion-item">
+                <div
+                  v-for="item in priorityGaps"
+                  :key="item"
+                  class="suggestion-item"
+                >
                   {{ item }}
                 </div>
               </div>
 
               <div class="optimizer-actions">
-                <button class="menu-button analyze-button" :disabled="!analysisReady" @click="generateCoverLetter">
-                  {{ coverLetterReady ? "Regenerate cover letter" : "Generate cover letter" }}
+                <button
+                  class="menu-button analyze-button"
+                  :disabled="!analysisReady"
+                  @click="generateCoverLetter"
+                >
+                  {{
+                    coverLetterReady
+                      ? "Regenerate cover letter"
+                      : "Generate cover letter"
+                  }}
                 </button>
-                <button class="menu-button analyze-button" :disabled="!analysisReady" @click="applySuggestions">
-                  {{ cvReady ? "Refresh CV suggestions" : "Apply suggestions to CV" }}
+                <button
+                  class="menu-button analyze-button"
+                  :disabled="!analysisReady"
+                  @click="applySuggestions"
+                >
+                  {{
+                    cvReady
+                      ? "Refresh CV suggestions"
+                      : "Apply suggestions to CV"
+                  }}
                 </button>
               </div>
             </div>
@@ -310,7 +336,7 @@ const suggestions = computed(() => {
   if (!analysisReady.value) {
     return [
       "Paste a job description to surface relevant gaps.",
-      "Upload one or more CV files to simulate local review.",
+      "Upload one or more CV files to review.",
       "Click Analyse documents to generate suggestions."
     ]
   }
@@ -367,18 +393,20 @@ const priorityGaps = computed(() => {
   if (!analysisReady.value) {
     return [
       "Upload a CV to see matched keywords.",
-      "The optimiser will highlight missing evidence.",
+      "The optimiser will highlight missing evidence."
     ]
   }
 
   if (!missingKeywords.value.length) {
     return [
       "The CV already covers the main role terms.",
-      "Use stronger measurable outcomes in bullet points.",
+      "Use stronger measurable outcomes in bullet points."
     ]
   }
 
-  return missingKeywords.value.slice(0, 3).map((skill) => `Add clearer evidence for ${skill}.`)
+  return missingKeywords.value
+    .slice(0, 3)
+    .map((skill) => `Add clearer evidence for ${skill}.`)
 })
 
 function handleFiles(event) {
