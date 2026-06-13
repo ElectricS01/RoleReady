@@ -2,6 +2,10 @@
 
 Prototype web-based AI career assistance platform
 
+## Prod deployment
+
+https://roleready.electrics01.com
+
 ## Project setup
 
 ```
