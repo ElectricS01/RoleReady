@@ -65,7 +65,7 @@ body {
   height: 200%;
   background-size: cover;
   user-select: none;
-  filter: brightness(0.1) blur(15px) saturate(1);
+  filter: brightness(0.1) hue-rotate(180deg) blur(15px) saturate(1);
   animation: moveImage 500s infinite alternate;
   transition:
     filter 0.3s ease,
@@ -74,7 +74,7 @@ body {
 }
 
 .light-mode .background {
-  filter: brightness(2) blur(20px) saturate(0.75);
+  filter: brightness(0.75) hue-rotate(150deg) blur(20px) saturate(0.75);
 }
 
 @keyframes moveImage {
@@ -524,7 +524,6 @@ input:focus {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
 }
 
 .optimizer-meter {
@@ -633,9 +632,14 @@ a {
 }
 
 p,
+h3,
+span,
 a,
 input,
+textarea,
 .menu,
+.suggestion-item,
+.optimizer-ring,
 .navbar {
   transition:
     background-color 1s ease,
@@ -651,9 +655,14 @@ input,
 .light-mode .table-add,
 .light-mode td,
 .light-mode input,
+.light-mode textarea,
 .light-mode .icon-mobile,
 .light-mode .menu-button,
 .light-mode p,
+.light-mode h3,
+.light-mode span,
+.light-mode .suggestion-item,
+.light-mode .optimizer-ring,
 .light-mode .navbar a {
   color: black;
 }
@@ -667,7 +676,6 @@ input,
 .light-mode .upload-box,
 .light-mode .file-chip,
 .light-mode .suggestion-item,
-.light-mode .feature,
 .light-mode .pdf-frame,
 .light-mode .optimizer-scorecard,
 .light-mode .optimizer-panel,

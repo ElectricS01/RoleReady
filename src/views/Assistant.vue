@@ -218,16 +218,12 @@
             <div class="optimizer-panel">
               <p class="optimizer-heading">Top keywords to keep</p>
               <div class="chip-row">
-                <span
-                  v-for="item in matchedKeywords"
-                  :key="item"
-                  class="feature"
-                >
+                <p v-for="item in matchedKeywords" :key="item" class="feature">
                   {{ item }}
-                </span>
-                <span v-if="!matchedKeywords.length" class="feature muted-chip">
+                </p>
+                <p v-if="!matchedKeywords.length" class="feature muted-chip">
                   No keywords matched yet
-                </span>
+                </p>
               </div>
 
               <p class="optimizer-heading">Priority gaps</p>
